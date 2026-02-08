@@ -31,7 +31,10 @@ This crate uses feature flags to allow selective inclusion of middleware compone
 - `middleware-proxy`: Enables proxy rotation functionality
 - `middleware-user-agent`: Enables user-agent rotation
 - `middleware-robots`: Enables robots.txt compliance checking
-- `middleware-cookies`: Enables cookie management
+- `middleware-cookies`: Enables cookie management (Note: Requires `cookie-store` feature in `spider-core` for full functionality)
+
+### Important Feature Relationships
+- `middleware-cookies` and `cookie-store` (from spider-core) are interdependent: When using `middleware-cookies`, `cookie-store` should also be enabled in spider-core for full functionality
 
 To use only core functionality:
 ```toml
