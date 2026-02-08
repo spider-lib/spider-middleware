@@ -6,16 +6,44 @@ Provides built-in middleware implementations for the `spider-lib` framework.
 
 The `spider-middleware` crate contains a comprehensive collection of middleware implementations that extend the functionality of web crawlers. Middlewares intercept and process requests and responses, enabling features like rate limiting, retries, user-agent rotation, and more.
 
+Middlewares are organized using feature flags to prevent bloat. Core middlewares are always available, while advanced features can be enabled as needed.
+
 ## Available Middlewares
 
+### Core Middlewares (Always Available)
 - **Rate Limiting**: Controls request rates to prevent server overload
 - **Retries**: Automatically retries failed or timed-out requests
-- **User-Agent Rotation**: Manages and rotates user agents
 - **Referer Management**: Handles the `Referer` header
-- **Cookies**: Persists cookies across requests to maintain sessions
-- **HTTP Caching**: Caches responses to accelerate development
-- **Robots.txt**: Adheres to `robots.txt` rules
-- **Proxy**: Manages and rotates proxy servers
+
+### Optional Middlewares (Feature-Gated)
+- **User-Agent Rotation**: Manages and rotates user agents (feature: `middleware-user-agent`)
+- **Cookies**: Persists cookies across requests to maintain sessions (feature: `middleware-cookies`)
+- **HTTP Caching**: Caches responses to accelerate development (feature: `middleware-cache`)
+- **Robots.txt**: Adheres to `robots.txt` rules (feature: `middleware-robots`)
+- **Proxy**: Manages and rotates proxy servers (feature: `middleware-proxy`)
+
+## Features
+
+This crate uses feature flags to allow selective inclusion of middleware components:
+
+- `core` (default): Includes core middleware functionality
+- `middleware-cache`: Enables HTTP caching capabilities
+- `middleware-proxy`: Enables proxy rotation functionality
+- `middleware-user-agent`: Enables user-agent rotation
+- `middleware-robots`: Enables robots.txt compliance checking
+- `middleware-cookies`: Enables cookie management
+
+To use only core functionality:
+```toml
+[dependencies]
+spider-middleware = { version = "...", default-features = false, features = ["core"] }
+```
+
+To include specific middleware:
+```toml
+[dependencies]
+spider-middleware = { version = "...", features = ["middleware-cache", "middleware-proxy"] }
+```
 
 ## Architecture
 
