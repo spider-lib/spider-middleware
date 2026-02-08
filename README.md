@@ -220,12 +220,6 @@ let proxy_middleware = ProxyMiddleware::builder()
     .build()?;
 ```
 
-## Dependencies
-
-This crate depends on:
-- `spider-util`: For request and response data structures
-- Various external crates for specific functionality (governor for rate limiting, reqwest for HTTP operations, etc.)
-
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](../LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
