@@ -1,0 +1,38 @@
+[package]
+name = "spider-middleware"
+version = "0.1.1"
+edition = "2024"
+authors = ["mzyui <mzyui@proton.me>"]
+description = "Middleware implementations for the spider-lib web scraping framework."
+homepage = "https://github.com/spider-lib/spider-middleware"
+repository = "https://github.com/spider-lib/spider-middleware"
+license = "MIT"
+readme = "README.md"
+keywords = ["web-scraping", "middleware", "crawler", "scraper", "rust"]
+categories = ["web-programming", "development-tools", "parsing"]
+
+[dependencies]
+async-trait = "0.1"
+dashmap = { version = "6.1.0", features = ["serde"] }
+governor = "0.3"
+moka = { version = "0.12", features = ["future", "sync"] }
+rand = "0.8"
+reqwest = { version = "0.13.1", features = ["json", "rustls"], default-features = false }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.149"
+tokio = { version = "1.0", features = ["full"] }
+tracing = "0.1"
+url = { version = "2.5.8", features = ["serde"] }
+bytes = { version = "1.11.1", features = ["serde"] }
+bincode = { version = "1.3" }
+dirs = { version = "5.0" }
+cookie = { version = "0.17" }
+cookie_store = { version = "0.20" }
+time = { version = "0.3", features = ["serde"] }
+robotstxt = { version = "0.3.0" }
+ua_generator = "0.5.46"
+seahash = "4.1.0"
+http = "1.4.0"
+hex = "0.4.3"
+sha2 = "0.10.9"
+spider-util = { version = "0.1.1" }
