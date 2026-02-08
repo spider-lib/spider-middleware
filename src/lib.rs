@@ -1,30 +1,8 @@
 //! # spider-middleware
 //!
-//! Provides built-in middleware implementations for the `spider-lib` framework.
+//! Built-in middleware implementations for the `spider-lib` framework.
 //!
-//! ## Overview
-//!
-//! The `spider-middleware` crate contains a comprehensive collection of middleware
-//! implementations that extend the functionality of web crawlers. Middlewares
-//! intercept and process requests and responses, enabling features like rate
-//! limiting, retries, user-agent rotation, and more.
-//!
-//! ## Available Middlewares
-//!
-//! - **Rate Limiting**: Controls request rates to prevent server overload
-//! - **Retries**: Automatically retries failed or timed-out requests
-//! - **Referer Management**: Handles the `Referer` header
-//! - **User-Agent Rotation**: Manages and rotates user agents (feature: `middleware-user-agent`)
-//! - **Cookies**: Persists cookies across requests to maintain sessions (feature: `middleware-cookies`)
-//! - **HTTP Caching**: Caches responses to accelerate development (feature: `middleware-cache`)
-//! - **Robots.txt**: Adheres to `robots.txt` rules (feature: `middleware-robots`)
-//! - **Proxy**: Manages and rotates proxy servers (feature: `middleware-proxy`)
-//!
-//! ## Architecture
-//!
-//! Each middleware implements the `Middleware` trait, allowing them to intercept
-//! requests before they are sent and responses after they are received. This
-//! enables flexible, composable behavior customization for crawlers.
+//! Provides middlewares for rate limiting, retries, user-agent rotation, cookies, and more.
 //!
 //! ## Example
 //!
@@ -32,7 +10,6 @@
 //! use spider_middleware::rate_limit::RateLimitMiddleware;
 //! use spider_middleware::retry::RetryMiddleware;
 //!
-//! // Add middlewares to your crawler
 //! let crawler = CrawlerBuilder::new(MySpider)
 //!     .add_middleware(RateLimitMiddleware::default())
 //!     .add_middleware(RetryMiddleware::new())
