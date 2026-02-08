@@ -8,7 +8,7 @@ use async_trait::async_trait;
 use dashmap::DashMap;
 use moka::sync::Cache;
 use reqwest::header::{HeaderValue, USER_AGENT};
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use std::fmt::Debug;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
@@ -100,10 +100,28 @@ impl Default for UserAgentSource {
     }
 }
 
+/// Custom serializer for Arc<String>
+fn serialize_arc_string<S>(x: &Arc<String>, s: S) -> Result<S::Ok, S::Error>
+where
+    S: Serializer,
+{
+    s.serialize_str(x.as_str())
+}
+
+/// Custom deserializer for Arc<String>
+fn deserialize_arc_string<'de, D>(deserializer: D) -> Result<Arc<String>, D::Error>
+where
+    D: Deserializer<'de>,
+{
+    let s = String::deserialize(deserializer)?;
+    Ok(Arc::new(s))
+}
+
 /// Represents a User-Agent profile, including the User-Agent string and other associated headers.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct UserAgentProfile {
     /// The User-Agent string.
+    #[serde(serialize_with = "serialize_arc_string", deserialize_with = "deserialize_arc_string")]
     pub user_agent: Arc<String>,
     /// Additional headers that should be sent with this User-Agent to mimic a real browser.
     #[serde(default)]
