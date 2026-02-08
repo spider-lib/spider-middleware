@@ -13,17 +13,17 @@
 //!
 //! - **Rate Limiting**: Controls request rates to prevent server overload
 //! - **Retries**: Automatically retries failed or timed-out requests
-//! - **User-Agent Rotation**: Manages and rotates user agents
 //! - **Referer Management**: Handles the `Referer` header
-//! - **Cookies**: Persists cookies across requests to maintain sessions
-//! - **HTTP Caching**: Caches responses to accelerate development
-//! - **Robots.txt**: Adheres to `robots.txt` rules
-//! - **Proxy**: Manages and rotates proxy servers
+//! - **User-Agent Rotation**: Manages and rotates user agents (feature: `middleware-user-agent`)
+//! - **Cookies**: Persists cookies across requests to maintain sessions (feature: `middleware-cookies`)
+//! - **HTTP Caching**: Caches responses to accelerate development (feature: `middleware-cache`)
+//! - **Robots.txt**: Adheres to `robots.txt` rules (feature: `middleware-robots`)
+//! - **Proxy**: Manages and rotates proxy servers (feature: `middleware-proxy`)
 //!
 //! ## Architecture
 //!
 //! Each middleware implements the `Middleware` trait, allowing them to intercept
-//! requests before they're sent and responses after they're received. This
+//! requests before they are sent and responses after they are received. This
 //! enables flexible, composable behavior customization for crawlers.
 //!
 //! ## Example
@@ -45,13 +45,23 @@ pub mod rate_limit;
 pub mod referer;
 pub mod request;
 pub mod retry;
-pub mod user_agent;
 
 pub use spider_util::request::Request;
 pub use spider_util::response::Response;
 
 pub mod prelude;
+
+#[cfg(feature = "middleware-user-agent")]
+pub mod user_agent;
+
+#[cfg(feature = "middleware-cookies")]
 pub mod cookies;
+
+#[cfg(feature = "middleware-cache")]
 pub mod http_cache;
+
+#[cfg(feature = "middleware-proxy")]
 pub mod proxy;
+
+#[cfg(feature = "middleware-robots")]
 pub mod robots_txt;
