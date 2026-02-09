@@ -1,6 +1,6 @@
 [package]
 name = "spider-middleware"
-version = "0.1.5"
+version = "0.1.6"
 edition = "2024"
 authors = ["mzyui <mzyui@proton.me>"]
 description = "Middleware implementations for the spider-lib web scraping framework."
@@ -35,7 +35,7 @@ seahash = "4.1.0"
 http = "1.4.0"
 hex = "0.4.3"
 sha2 = "0.10.9"
-spider-util = { version = "0.1.1", path = "../spider-util" }
+spider-util = { version = "0.1.2", path = "../spider-util" }
 
 [features]
 default = ["core"]

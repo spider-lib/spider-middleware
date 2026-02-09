@@ -12,8 +12,8 @@ use async_trait::async_trait;
 use std::time::Duration;
 use tracing::{info, trace, warn};
 
-use spider_util::error::SpiderError;
 use crate::middleware::{Middleware, MiddlewareAction};
+use spider_util::error::SpiderError;
 use spider_util::request::Request;
 use spider_util::response::Response;
 
@@ -92,7 +92,10 @@ impl<C: Send + Sync> Middleware<C> for RetryMiddleware {
         &mut self,
         response: Response,
     ) -> Result<MiddlewareAction<Response>, SpiderError> {
-        trace!("Processing response for URL: {} with status: {}", response.url, response.status);
+        trace!(
+            "Processing response for URL: {} with status: {}",
+            response.url, response.status
+        );
 
         if self.retry_http_codes.contains(&response.status.as_u16()) {
             let mut request = response.request_from_response();
@@ -118,7 +121,10 @@ impl<C: Send + Sync> Middleware<C> for RetryMiddleware {
                 return Ok(MiddlewareAction::Drop);
             }
         } else {
-            trace!("Response status {} is not in retry codes, continuing", response.status);
+            trace!(
+                "Response status {} is not in retry codes, continuing",
+                response.status
+            );
         }
 
         Ok(MiddlewareAction::Continue(response))
@@ -171,3 +177,4 @@ impl RetryMiddleware {
         delay.min(self.max_delay)
     }
 }
+

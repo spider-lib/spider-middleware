@@ -28,8 +28,8 @@ use governor::state::{InMemoryState, NotKeyed};
 use governor::{Quota, RateLimiter as GovernorRateLimiter};
 use std::num::NonZeroU32;
 
-use spider_util::error::SpiderError;
 use crate::middleware::{Middleware, MiddlewareAction};
+use spider_util::error::SpiderError;
 use spider_util::request::Request;
 use spider_util::response::Response;
 
@@ -179,7 +179,7 @@ impl RateLimiter for TokenBucketLimiter {
         self.limiter.until_ready().await;
     }
 
-    // A fixed-rate limiter does not adjust based on responses.
+    /// A fixed-rate limiter does not adjust based on responses.
     async fn adjust(&self, _response: &Response) {
         // No-op for a fixed-rate limiter
     }

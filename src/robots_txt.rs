@@ -18,12 +18,12 @@ use moka::future::Cache;
 use robotstxt::DefaultMatcher;
 use tracing::{debug, info, warn};
 
-use spider_util::error::SpiderError;
 use crate::middleware::{Middleware, MiddlewareAction};
-use spider_util::request::Request;
-use reqwest::StatusCode;
 use bytes::Bytes;
 use reqwest::Client;
+use reqwest::StatusCode;
+use spider_util::error::SpiderError;
+use spider_util::request::Request;
 
 /// A simple HTTP client trait for fetching web content.
 #[async_trait]
@@ -192,4 +192,3 @@ impl<C: SimpleHttpClient> Middleware<C> for RobotsTxtMiddleware {
         Err(SpiderError::BlockedByRobotsTxt)
     }
 }
-

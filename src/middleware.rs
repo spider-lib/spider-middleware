@@ -58,3 +58,4 @@ pub trait Middleware<C: Send + Sync>: Any + Send + Sync + 'static {
         Err(error.clone())
     }
 }
+

@@ -13,16 +13,16 @@
 use async_trait::async_trait;
 use reqwest::StatusCode;
 use reqwest::header::{HeaderMap, HeaderName, HeaderValue};
-use tokio::fs;
 use std::path::PathBuf;
+use tokio::fs;
 use tracing::{debug, info, trace, warn};
 
-use spider_util::error::SpiderError;
 use crate::middleware::{Middleware, MiddlewareAction};
-use spider_util::request::Request;
-use spider_util::response::Response;
 use bytes::Bytes;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
+use spider_util::error::SpiderError;
+use spider_util::request::Request;
+use spider_util::response::Response;
 use url::Url;
 
 fn serialize_headermap<S>(headers: &HeaderMap, serializer: S) -> Result<S::Ok, S::Error>

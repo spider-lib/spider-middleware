@@ -17,8 +17,8 @@ use reqwest::header::{HeaderValue, REFERER};
 use std::sync::Arc;
 use url::Url;
 
-use spider_util::error::SpiderError;
 use crate::middleware::{Middleware, MiddlewareAction};
+use spider_util::error::SpiderError;
 use spider_util::request::Request;
 use spider_util::response::Response;
 use tracing::{debug, info};
@@ -201,3 +201,4 @@ impl<C: Send + Sync> Middleware<C> for RefererMiddleware {
         Ok(MiddlewareAction::Continue(response))
     }
 }
+

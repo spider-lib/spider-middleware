@@ -21,8 +21,8 @@ use ua_generator::ua::*;
 
 use rand::seq::SliceRandom;
 
-use spider_util::error::SpiderError;
 use crate::middleware::{Middleware, MiddlewareAction};
+use spider_util::error::SpiderError;
 use spider_util::request::Request;
 
 /// Defines the strategy for rotating User-Agents.
@@ -121,7 +121,10 @@ where
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct UserAgentProfile {
     /// The User-Agent string.
-    #[serde(serialize_with = "serialize_arc_string", deserialize_with = "deserialize_arc_string")]
+    #[serde(
+        serialize_with = "serialize_arc_string",
+        deserialize_with = "deserialize_arc_string"
+    )]
     pub user_agent: Arc<String>,
     /// Additional headers that should be sent with this User-Agent to mimic a real browser.
     #[serde(default)]
@@ -470,3 +473,4 @@ impl<C: Send + Sync> Middleware<C> for UserAgentMiddleware {
         Ok(MiddlewareAction::Continue(request))
     }
 }
+

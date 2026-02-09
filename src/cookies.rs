@@ -14,8 +14,8 @@ use time::OffsetDateTime;
 use tokio::sync::Mutex;
 use url::Url;
 
-use spider_util::error::SpiderError;
 use crate::middleware::{Middleware, MiddlewareAction};
+use spider_util::error::SpiderError;
 use spider_util::request::Request;
 use spider_util::response::Response;
 
@@ -131,11 +131,8 @@ impl CookieMiddleware {
                 continue;
             }
 
-            let cookie =
-                Cookie::parse(line) // Fixed parse_owned to parse
-                    .map_err(|e| {
-                        SpiderError::GeneralError(format!("Failed to parse cookie: {}", e))
-                    })?;
+            let cookie = Cookie::parse(line)
+                .map_err(|e| SpiderError::GeneralError(format!("Failed to parse cookie: {}", e)))?;
 
             let domain = cookie.domain().ok_or_else(|| {
                 SpiderError::GeneralError(
@@ -144,10 +141,8 @@ impl CookieMiddleware {
             })?;
 
             let secure = cookie.secure().unwrap_or(false);
-
             let url_str = format!("{}://{}", if secure { "https" } else { "http" }, domain);
             let url = Url::parse(&url_str)?;
-
             store.store_response_cookies(std::iter::once(cookie), &url);
         }
 
@@ -209,4 +204,3 @@ impl Default for CookieMiddleware {
         Self::new()
     }
 }
-

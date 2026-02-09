@@ -43,7 +43,6 @@ impl Serialize for Body {
         match self {
             Body::Json(value) => map.serialize_entry("Json", value)?,
             Body::Form(dashmap) => {
-                // Convert DashMap to HashMap for serialization
                 let hmap: HashMap<String, String> = dashmap.clone().into_iter().collect();
                 map.serialize_entry("Form", &hmap)?
             }
@@ -126,7 +125,6 @@ impl Serialize for Request {
         S: serde::Serializer,
     {
         use serde::ser::SerializeStruct;
-        // Convert HeaderMap to a serializable format
         let headers_vec: Vec<(String, String)> = self
             .headers
             .iter()
@@ -205,7 +203,6 @@ impl<'de> Deserialize<'de> for Request {
                             if headers.is_some() {
                                 return Err(de::Error::duplicate_field("headers"));
                             }
-                            // Deserialize headers vector and convert back to HeaderMap
                             let headers_vec: Vec<(String, String)> = map.next_value()?;
                             let mut header_map = HeaderMap::new();
                             for (name, value) in headers_vec {
@@ -231,14 +228,14 @@ impl<'de> Deserialize<'de> for Request {
                 let url = url.ok_or_else(|| de::Error::missing_field("url"))?;
                 let method = method.ok_or_else(|| de::Error::missing_field("method"))?;
                 let headers = headers.ok_or_else(|| de::Error::missing_field("headers"))?;
-                let body = body; // Optional field
+                let body = body;
 
                 Ok(Request {
                     url,
                     method,
                     headers,
                     body,
-                    meta: DashMap::new(), // Initialize empty meta map
+                    meta: DashMap::new(),
                 })
             }
         }
@@ -367,3 +364,4 @@ impl Request {
         hex::encode(hasher.finalize())
     }
 }
+
