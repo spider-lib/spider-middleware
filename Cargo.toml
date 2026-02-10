@@ -35,7 +35,6 @@ seahash = "4.1.0"
 http = "1.4.0"
 hex = "0.4.3"
 sha2 = "0.10.9"
-
 spider-util = { version = "0.1.7", path = "../spider-util" }
 
 [features]

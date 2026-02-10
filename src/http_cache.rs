@@ -11,6 +11,7 @@
 //! using `bincode`.
 
 use async_trait::async_trait;
+use bytes::Bytes;
 use reqwest::StatusCode;
 use reqwest::header::{HeaderMap, HeaderName, HeaderValue};
 use std::path::PathBuf;
