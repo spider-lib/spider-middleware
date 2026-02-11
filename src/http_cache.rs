@@ -16,10 +16,9 @@ use reqwest::StatusCode;
 use reqwest::header::{HeaderMap, HeaderName, HeaderValue};
 use std::path::PathBuf;
 use tokio::fs;
-use tracing::{debug, info, trace, warn};
+use log::{debug, info, trace, warn};
 
 use crate::middleware::{Middleware, MiddlewareAction};
-use bytes::Bytes;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use spider_util::error::SpiderError;
 use spider_util::request::Request;

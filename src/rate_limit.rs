@@ -21,7 +21,7 @@ use std::sync::Arc;
 use std::time::Duration;
 use tokio::sync::Mutex;
 use tokio::time::{Instant, sleep};
-use tracing::{debug, info};
+use log::{debug, info};
 
 use governor::clock::DefaultClock;
 use governor::state::{InMemoryState, NotKeyed};

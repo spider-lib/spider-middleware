@@ -14,7 +14,7 @@ use std::io::{BufRead, BufReader};
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
-use tracing::{info, warn};
+use log::{info, warn};
 
 use spider_util::error::SpiderError;
 use crate::middleware::{Middleware, MiddlewareAction};

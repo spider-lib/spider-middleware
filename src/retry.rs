@@ -10,7 +10,7 @@
 
 use async_trait::async_trait;
 use std::time::Duration;
-use tracing::{info, trace, warn};
+use log::{info, trace, warn};
 
 use crate::middleware::{Middleware, MiddlewareAction};
 use spider_util::error::SpiderError;

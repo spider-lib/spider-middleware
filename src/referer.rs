@@ -21,7 +21,7 @@ use crate::middleware::{Middleware, MiddlewareAction};
 use spider_util::error::SpiderError;
 use spider_util::request::Request;
 use spider_util::response::Response;
-use tracing::{debug, info};
+use log::{debug, info};
 
 /// Referer middleware that automatically sets Referer headers
 /// based on the navigation chain

@@ -16,7 +16,7 @@ use async_trait::async_trait;
 use http::header::USER_AGENT;
 use moka::future::Cache;
 use robotstxt::DefaultMatcher;
-use tracing::{debug, info, warn};
+use log::{debug, info, warn};
 
 use crate::middleware::{Middleware, MiddlewareAction};
 use bytes::Bytes;
